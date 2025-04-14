@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./back
+      dockerfile: AltenTest.API/Dockerfile
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=AltenTestDb;User=sa;Password=YourStrong!Password;TrustServerCertificate=True
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80;https://+:443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=YourSecurePassword123!
+    volumes:
+      - api_logs:/app/logs
+      - ./back/https:/https:ro
+    depends_on:
+      - db
+    networks:
+      - alten-network
+    restart: unless-stopped
+
+  db:
+    container_name: alten-test-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    user: "0:0"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong!Password
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
+    networks:
+      - alten-network
+    restart: unless-stopped
+
+volumes:
+  sql_data:
+    name: alten_sql_data
+  api_logs:
+    name: alten_api_logs
+
+networks:
+  alten-network:
+    name: alten-network

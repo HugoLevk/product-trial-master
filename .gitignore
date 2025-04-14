@@ -1,0 +1,59 @@
+# .NET files
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+.vscode/
+*.csproj.user
+*.dbmdl
+*.log
+*.pdb
+*.cache/
+*.ide/
+*.dll
+*.exe
+*.app/
+*.appx/
+*.appxsym/
+*.publish/
+*.nuget/
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Angular files
+node_modules/
+dist/
+tmp/
+out-tsc/
+.angular/
+.angular-cache/
+*.log
+*.tsbuildinfo
+*.map
+
+# Environment files
+.env
+.env.*.local
+
+# IDE-specific files
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
