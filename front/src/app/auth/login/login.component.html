@@ -1,0 +1,33 @@
+<div class="login-container">
+  <p-card header="Connexion" class="login-card">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Email Field -->
+      <div class="field">
+        <label for="email" class="block">Email</label>
+        <input id="email" type="email" pInputText formControlName="email" class="w-full"
+          [ngClass]="{'ng-invalid ng-dirty': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}" />
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched) {
+        <small class="p-error block">Email invalide</small>
+        }
+      </div>
+
+      <!-- Password Field -->
+      <div class="field">
+        <label for="password" class="block">Mot de passe</label>
+        <p-password id="password" formControlName="password" [feedback]="false" [toggleMask]="true"
+          [style]="{ width: '100%' }"
+          [ngClass]="{'ng-invalid ng-dirty': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}" />
+        @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+        <small class="p-error block">Mot de passe requis</small>
+        }
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex justify-content-between align-items-center">
+        <p-button label="S'inscrire" icon="pi pi-user-plus" (click)="navigateToRegister()" text />
+        <p-button type="submit" label="Se connecter" icon="pi pi-sign-in" [disabled]="loginForm.invalid" />
+      </div>
+    </form>
+  </p-card>
+</div>
+<p-toast />

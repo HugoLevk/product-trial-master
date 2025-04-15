@@ -1,0 +1,153 @@
+.p-password-input {
+  min-width: 100%;
+}
+
+.p-password {
+  min-width: 100%;
+}
+
+eyeicon{
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+// Layout
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--surface-ground);
+}
+
+.login-card {
+  width: 400px;
+  background-color: var(--surface-card);
+}
+
+// Card styles
+.p-card {
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),
+              0 1px 1px 0 rgba(0,0,0,.14),
+              0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+// Form fields
+.field {
+  margin-bottom: 1rem;
+}
+
+// Input styles
+input[type="email"],
+::ng-deep .p-password-input {
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  height: 38px;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  background-color: var(--surface-ground);
+  color: var(--text-color);
+  transition: border-color 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-100);
+  }
+}
+
+// Password component
+::ng-deep p-password {
+  width: 100%;
+  display: block;
+  position: relative;
+
+  .p-password-input {
+    width: 100% !important;
+    min-width: 100% !important;
+    padding-right: 3rem;
+  }
+
+  .p-password-toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color-secondary);
+    cursor: pointer;
+    z-index: 1;
+    padding: 0.25rem;
+
+    &:hover {
+      color: var(--text-color);
+    }
+  }
+}
+
+// Labels
+label {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+// Validation states
+.ng-invalid.ng-dirty {
+  border-color: var(--red-500) !important;
+}
+
+.p-error {
+  color: var(--red-500);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+// Buttons
+::ng-deep .p-button {
+  &.p-button-text {
+    color: var(--primary-color);
+
+    &:hover {
+      background: var(--primary-50);
+    }
+  }
+}
+
+// Utility classes
+.block {
+  display: block;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}

@@ -1,0 +1,64 @@
+<div class="register-container">
+  <p-card header="Inscription" class="register-card">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="field mb-3">
+        <label for="username" class="block mb-2">Nom d'utilisateur</label>
+        <input id="username" type="text" pInputText formControlName="username" class="w-full" [ngClass]="{
+            'ng-invalid ng-dirty':
+              registerForm.get('username')?.invalid &&
+              registerForm.get('username')?.touched
+          }" />
+        @if (registerForm.get('username')?.invalid &&
+        registerForm.get('username')?.touched) {
+        <small class="p-error block">Nom d'utilisateur requis</small>
+        }
+      </div>
+
+      <div class="field mb-3">
+        <label for="firstname" class="block mb-2">Prénom</label>
+        <input id="firstname" type="text" pInputText formControlName="firstname" class="w-full" [ngClass]="{
+            'ng-invalid ng-dirty':
+              registerForm.get('firstname')?.invalid &&
+              registerForm.get('firstname')?.touched
+          }" />
+        @if (registerForm.get('firstname')?.invalid &&
+        registerForm.get('firstname')?.touched) {
+        <small class="p-error block">Prénom requis</small>
+        }
+      </div>
+
+      <div class="field mb-3">
+        <label for="email" class="block mb-2">Email</label>
+        <input id="email" type="email" pInputText formControlName="email" class="w-full" [ngClass]="{
+            'ng-invalid ng-dirty':
+              registerForm.get('email')?.invalid &&
+              registerForm.get('email')?.touched
+          }" />
+        @if (registerForm.get('email')?.invalid &&
+        registerForm.get('email')?.touched) {
+        <small class="p-error block">Email invalide</small>
+        }
+      </div>
+
+      <div class="field mb-3">
+        <label for="password" class="block mb-2">Mot de passe</label>
+        <p-password id="password" formControlName="password" [feedback]="true" [toggleMask]="true"
+          [style]="{ width: '100%' }" [ngClass]="{
+            'ng-invalid ng-dirty':
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+          }"></p-password>
+        @if (registerForm.get('password')?.invalid &&
+        registerForm.get('password')?.touched) {
+        <small class="p-error block">Le mot de passe doit contenir au moins 6 caractères</small>
+        }
+      </div>
+
+      <div class="flex justify-content-between align-items-center mt-4">
+        <p-button label="Se connecter" icon="pi pi-sign-in" (click)="navigateToLogin()" text></p-button>
+        <p-button type="submit" label="S'inscrire" icon="pi pi-user-plus" [disabled]="registerForm.invalid"></p-button>
+      </div>
+    </form>
+  </p-card>
+</div>
+<p-toast></p-toast>

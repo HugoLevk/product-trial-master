@@ -1,22 +1,60 @@
 <h1 class="text-center">Liste des produits</h1>
 
-<p-button label="Créer produit" (onClick)="onCreate()" class="block text-center"/>
+<p-button label="Créer produit" (onClick)="onCreate()" class="block text-center" *ngIf="isAdmin" />
 
 <p-dataView #dv [value]="products()">
     <ng-template pTemplate="list" let-products>
-        @for (product of products; track product) {
-            <p-card class="block mb-2">
-                <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
-                <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
+        <div class="flex flex-wrap gap-3 justify-content-center">
+            @for (product of products; track product) {
+                <p-card class="flex-1 min-w-20rem max-w-30rem">
+                  <div class="flex flex-column gap-3">
+                    <div class="flex justify-content-between align-items-start">
+                      <div class="flex-1">
+                        <span class="font-medium text-secondary text-sm">{{ product.category }}</span>
+                        <div class="text-lg font-medium text-900 mt-2">{{ product.name }}</div>
+                                <div class="text-500 mt-2">{{ product.description }}</div>
+                                </div>
+                                @if (product.image) {
+                                <img [src]="product.image" [alt]="product.name" class="w-3rem h-3rem object-cover ml-3" />
+                                }
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                  <div class="flex flex-column">
+                                    <span class="text-600 font-medium">Prix</span>
+                                    <span class="text-900">{{ product.price | currency:'EUR' }}</span>
+                                  </div>
+                                  <div class="flex flex-column">
+                                    <span class="text-600 font-medium">Stock</span>
+                                    <span class="text-900">{{ product.quantity }}</span>
+                                  </div>
+                                  <div class="flex flex-column">
+                                    <span class="text-600 font-medium">Référence</span>
+                                    <span class="text-900">{{ product.internalReference }}</span>
+                                  </div>
+                                  <div class="flex flex-column">
+                                    <span class="text-600 font-medium">Note</span>
+                                    <span class="text-900">{{ product.rating }}/5</span>
+                                  </div>
+                                  <div class="flex flex-column col-span-2">
+                                    <span class="text-600 font-medium">Statut</span>
+                                    <span [ngClass]="{'text-green-500': product.quantity > 0, 'text-red-500': product.quantity === 0}">
+                                      {{ product.quantity > 0 ? 'En stock' : 'Rupture de stock' }}
+                                    </span>
+                                  </div>
+                                </div>
+                                </div>
 
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)"/>
-                        <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)" />
-                    </div>
-                </ng-template>
-            </p-card>
-        }
+                    <ng-template pTemplate="footer">
+                      <div class="flex gap-3 mt-1">
+                            @if (isAdmin) {
+                            <p-button label="Modifier" severity="secondary" (onClick)="onUpdate(product)" />
+                            <p-button label="Supprimer" severity="danger" (onClick)="onDelete(product)" />
+                            }
+                        </div>
+                        </ng-template>
+                        </p-card>
+                        }
+        </div>
     </ng-template>
 </p-dataView>
 

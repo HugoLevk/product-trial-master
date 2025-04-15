@@ -17,6 +17,7 @@
     "strict": true
   },
   "angularCompilerOptions": {
-    "strictTemplates": true
+    "strictTemplates": true,
+    "standalone": true
   }
 }

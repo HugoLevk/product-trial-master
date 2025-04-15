@@ -15,13 +15,13 @@ export class WishlistService {
 
   public getWishlist(): Observable<Wishlist> {
     return this.http
-      .get<Wishlist>(this.path)
+      .get<Wishlist>(this.path, { withCredentials: true })
       .pipe(tap((wishlist) => this._wishlist.set(wishlist)));
   }
 
   public addToWishlist(productId: number): Observable<Wishlist> {
     return this.http
-      .post<Wishlist>(`${this.path}/items/${productId}`, {})
+      .post<Wishlist>(`${this.path}/items/${productId}`, {}, { withCredentials: true })
       .pipe(tap((wishlist) => this._wishlist.set(wishlist)));
   }
 
@@ -30,7 +30,7 @@ export class WishlistService {
     productId: number
   ): Observable<void> {
     return this.http
-      .delete<void>(`${this.path}/items/${wishlistId}/${productId}`)
+      .delete<void>(`${this.path}/items/${wishlistId}/${productId}`, { withCredentials: true })
       .pipe(
         tap(() => {
           const currentWishlist = this._wishlist();
@@ -48,7 +48,7 @@ export class WishlistService {
 
   public clearWishlist(): Observable<void> {
     return this.http
-      .delete<void>(this.path)
+      .delete<void>(this.path, { withCredentials: true })
       .pipe(tap(() => this._wishlist.set(null)));
   }
 }

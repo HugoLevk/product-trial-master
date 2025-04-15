@@ -1,0 +1,21 @@
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  ::ng-deep {
+    .p-avatar {
+      transition: transform 0.2s ease-in-out;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+
+    .p-button {
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+    }
+  }
+}

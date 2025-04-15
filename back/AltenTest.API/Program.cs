@@ -54,6 +54,23 @@ static void ConfigureServices(WebApplicationBuilder builder)
 
     builder.Services.AddScoped<IAuthService, AuthService>();
 
+    // Add CORS configuration
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAngularApp", policy =>
+        {
+            policy.WithOrigins(
+                    "http://localhost:4200",  // Angular default port
+                    "http://localhost:58907", // Debug port
+                    "http://127.0.0.1:4200",  // Alternative localhost
+                    "http://127.0.0.1:58907"  // Alternative localhost
+                )
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+        });
+    });
+
     ConfigureIdentityAndAuth(builder);
 
     ConfigureSwagger(builder);
@@ -137,7 +154,6 @@ static void ConfigureSwagger(WebApplicationBuilder builder)
 
 static void ConfigureApp(WebApplication app)
 {
-
     app.UseMiddleware<ErrorHandlingMiddleware>();
 
     if (app.Environment.IsDevelopment())
@@ -154,6 +170,9 @@ static void ConfigureApp(WebApplication app)
     app.UseHttpsRedirection();
 
     app.UseRouting();
+
+    // Use CORS before authentication and authorization
+    app.UseCors("AllowAngularApp");
 
     app.UseAuthentication();
     app.UseAuthorization();

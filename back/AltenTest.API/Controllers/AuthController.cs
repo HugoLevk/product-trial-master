@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace AltenTest.API.Controllers;
 
 [ApiController]
+[Route("api/[controller]")]
 public class AuthController(IAuthService _authService, SignInManager<User> _signInManager) : ControllerBase
 {
 
-    [HttpPost("/account")]
+    [HttpPost("account")]
     public async Task<ActionResult<AuthResponseDto>> Register([FromBody] RegisterDto registerDto)
     {
         try
@@ -24,7 +25,7 @@ public class AuthController(IAuthService _authService, SignInManager<User> _sign
         }
     }
 
-    [HttpPost("/token")]
+    [HttpPost("token")]
     public async Task<ActionResult<AuthResponseDto>> Login([FromBody] LoginDto loginDto)
     {
         try
@@ -38,7 +39,7 @@ public class AuthController(IAuthService _authService, SignInManager<User> _sign
         }
     }
 
-    [HttpPost("/logout")]
+    [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();

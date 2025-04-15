@@ -4,14 +4,15 @@ export interface LoginDto {
 }
 
 export interface RegisterDto {
+  username: string;
+  firstname: string;
   email: string;
   password: string;
-  firstName: string;
-  userName: string;
 }
 
-export interface AuthResponseDto {
+export interface AuthResponse {
   token: string;
-  userName: string;
+  username: string;
   email: string;
 }
+

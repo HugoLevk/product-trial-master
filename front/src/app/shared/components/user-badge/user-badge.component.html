@@ -1,0 +1,12 @@
+<div class="user-badge">
+  @if (authService.isAuthenticated()) {
+  <p-avatar [label]="getUserInitials()" shape="circle" size="large" [style]="{
+        'background-color': 'var(--primary-color)',
+        color: 'var(--primary-color-text)',
+        cursor: 'pointer'
+      }" (click)="onUserClick()" (keydown)="onUserClick()" />
+  } @else {
+  <p-button icon="pi pi-user" (click)="navigateToLogin()" (keydown)="navigateToLogin()" severity="secondary" text
+    rounded aria-label="Se connecter" />
+  }
+</div>
