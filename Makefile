@@ -27,6 +27,10 @@ logs:
 logs-api:
 	$(DOCKER_COMPOSE) logs -f api
 
+.PHONY: logs-frontend
+logs-frontend:
+	$(DOCKER_COMPOSE) logs -f frontend
+
 .PHONY: logs-db
 logs-db:
 	$(DOCKER_COMPOSE) logs -f db
@@ -65,6 +69,7 @@ help:
 	@echo "  make restart     - Redémarre les conteneurs"
 	@echo "  make logs        - Affiche les logs de tous les conteneurs"
 	@echo "  make logs-api    - Affiche les logs de l'API"
+	@echo "  make logs-frontend - Affiche les logs du frontend Angular"
 	@echo "  make logs-db     - Affiche les logs de la base de données"
 	@echo "  make build       - Build la solution .NET et les images Docker"
 	@echo "  make rebuild     - Clean, rebuild la solution et les images sans cache"

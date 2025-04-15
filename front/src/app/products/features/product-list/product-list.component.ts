@@ -18,10 +18,10 @@ const emptyProduct: Product = {
   quantity: 0,
   internalReference: "",
   shellId: 0,
-  inventoryStatus: "INSTOCK",
+  inventoryStatus: 0,
   rating: 0,
-  createdAt: 0,
-  updatedAt: 0,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 @Component({

@@ -4,8 +4,19 @@
 #
 # For IE 9-11 support, please remove 'not' from the last line of the file and adjust as needed
 
-> 0.5%
+# Navigateurs supportés par Angular CLI
 last 2 versions
-Firefox ESR
 not dead
-not IE 9-11
+not IE 11
+not op_mini all
+not kaios 2.5
+not ios_saf 15.2-15.3
+not safari 15.2-15.3
+
+# Configuration pour les navigateurs modernes
+> 0.5%
+Firefox ESR
+Chrome >= 61
+Edge >= 79
+Safari >= 13
+iOS >= 13
