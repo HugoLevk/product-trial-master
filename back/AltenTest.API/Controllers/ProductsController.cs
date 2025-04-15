@@ -33,7 +33,7 @@ public class ProductsController(IProductService productService) : ControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateProductDTO updateProductDto)
+    public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductDTO updateProductDto)
     {
         ProductDTO updatedProduct = await productService.UpdateAsync(updateProductDto);
         return Ok(updatedProduct);

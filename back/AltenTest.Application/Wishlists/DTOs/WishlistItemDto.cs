@@ -2,7 +2,6 @@ namespace AltenTest.Application.Wishlists.DTOs;
 
 public class WishlistItemDto
 {
-    public int Id { get; set; }
     public int ProductId { get; set; }
     public string ProductName { get; set; } = string.Empty;
     public decimal ProductPrice { get; set; }

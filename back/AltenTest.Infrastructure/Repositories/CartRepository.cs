@@ -10,7 +10,10 @@ public class CartRepository(ApplicationDbContext context) : ICartRepository
 {
     public async Task<Cart?> GetByUserIdAsync(string userId)
     {
-        return await context.Carts.FirstOrDefaultAsync(c => c.UserId == userId);
+        return await context.Carts
+        .Include(c => c.Items)
+            .ThenInclude(i => i.Product)
+        .FirstOrDefaultAsync(c => c.UserId == userId);
     }
 
     public async Task<Cart> AddAsync(Cart cart)
