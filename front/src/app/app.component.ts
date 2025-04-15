@@ -1,4 +1,10 @@
-import { Component, effect, inject, signal } from "@angular/core";
+import {
+  Component,
+  effect,
+  inject,
+  signal,
+  WritableSignal,
+} from "@angular/core";
 import { Router, RouterModule } from "@angular/router";
 import { BadgeModule } from "primeng/badge";
 import { ButtonModule } from "primeng/button";
@@ -30,7 +36,7 @@ export class AppComponent {
   readonly cartService = inject(CartService);
   readonly authService = inject(AuthService);
 
-  public cartItemCount = signal(0);
+  public cartItemCount: WritableSignal<number> = signal(0);
 
   constructor() {
     effect(() => {

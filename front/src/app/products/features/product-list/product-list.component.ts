@@ -125,22 +125,47 @@ export class ProductListComponent implements OnInit {
   public removeFromCart(product: Product) {
     const currentCart = this.cartService.cart();
     if (currentCart) {
-      this.cartService.removeFromCart(currentCart.id, product.id).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: "success",
-            summary: "Succès",
-            detail: "Produit retiré du panier",
+      const currentQuantity = this.getProductQuantityInCart(product.id);
+
+      if (currentQuantity <= 1) {
+        // Si la quantité est 1 ou moins, on supprime complètement le produit
+        this.cartService.removeFromCart(currentCart.id, product.id).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: "success",
+              summary: "Succès",
+              detail: "Produit retiré du panier",
+            });
+          },
+          error: () => {
+            this.messageService.add({
+              severity: "error",
+              summary: "Erreur",
+              detail: "Impossible de retirer le produit du panier",
+            });
+          },
+        });
+      } else {
+        // Sinon, on réduit la quantité de 1
+        this.cartService
+          .addToCart({ productId: product.id, quantity: -1 })
+          .subscribe({
+            next: () => {
+              this.messageService.add({
+                severity: "success",
+                summary: "Succès",
+                detail: "Quantité réduite dans le panier",
+              });
+            },
+            error: () => {
+              this.messageService.add({
+                severity: "error",
+                summary: "Erreur",
+                detail: "Impossible de réduire la quantité du produit",
+              });
+            },
           });
-        },
-        error: () => {
-          this.messageService.add({
-            severity: "error",
-            summary: "Erreur",
-            detail: "Impossible de retirer le produit du panier",
-          });
-        },
-      });
+      }
     }
   }
 

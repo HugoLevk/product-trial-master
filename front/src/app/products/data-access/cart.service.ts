@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, OnInit, inject, signal } from "@angular/core";
+import { Injectable, OnInit, computed, inject, signal } from "@angular/core";
 import { environment } from "environments/environment";
 import { Observable, tap } from "rxjs";
 import { AddToCartDto, Cart, UpdateCartItemDto } from "./cart.model";
@@ -12,6 +12,12 @@ export class CartService implements OnInit {
   private readonly path = `${environment.apiUrl}/Cart`;
 
   public cart = signal<Cart | null>(null);
+
+  public cartItemCount = computed(() => {
+    const currentCart = this.cart();
+    if (!currentCart) return 0;
+    return currentCart.items.reduce((total, item) => total + item.quantity, 0);
+  });
 
   ngOnInit(): void {
     this.getCart();

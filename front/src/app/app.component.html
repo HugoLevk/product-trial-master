@@ -11,7 +11,7 @@
             <div class="flex align-items-center gap-2">
                 <i class="pi pi-shopping-cart" style="font-size: 2rem"></i>
                 <p-button icon="pi pi-shopping-cart" (onClick)="onViewCart()" />
-                <p-badge [value]="this.cartService.cart()?.items?.length?.toString()" severity="info" />
+                <p-badge [value]="this.cartService.cartItemCount()" severity="info" />
                 </div>
           }
             <app-user-badge />
