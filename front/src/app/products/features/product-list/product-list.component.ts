@@ -144,12 +144,6 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  public getCartItemCount(): number {
-    return (
-      this.cart()?.items.reduce((total, item) => total + item.quantity, 0) ?? 0
-    );
-  }
-
   public onViewCart() {
     this.router.navigate(["/cart"]);
   }

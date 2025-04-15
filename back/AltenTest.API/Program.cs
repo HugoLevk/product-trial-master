@@ -60,10 +60,10 @@ static void ConfigureServices(WebApplicationBuilder builder)
         options.AddPolicy("AllowAngularApp", policy =>
         {
             policy.WithOrigins(
-                    "http://localhost:4200",  // Angular default port
-                    "http://localhost:58907", // Debug port
-                    "http://127.0.0.1:4200",  // Alternative localhost
-                    "http://127.0.0.1:58907"  // Alternative localhost
+                    "http://localhost:4200",  // Angular default port 
+                    "http://127.0.0.1:4200",  // Alternative localhost 
+                    "http://localhost:5000", // Swagger Http
+                    "https://localhost:5000" // Swagger Https
                 )
                 .AllowAnyMethod()
                 .AllowAnyHeader()

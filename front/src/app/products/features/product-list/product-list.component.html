@@ -56,7 +56,8 @@
                       <div class="flex align-items-center gap-2">
                         <p-button label="Ajouter au panier" icon="pi pi-shopping-cart" (onClick)="addToCart(product)" />
                         <p-badge [value]="getProductQuantityInCart(product.id).toString()" severity="info" />
-                        <p-badge value="➖" severity="warning" [style]="{'cursor': 'pointer'}" (click)="removeFromCart(product)" />
+                        <p-badge value="➖" severity="warning" [style]="{'cursor': 'pointer'}" (click)="removeFromCart(product)"
+                          (keydown)="removeFromCart(product)" />
                       </div>
                       }
                     </div>

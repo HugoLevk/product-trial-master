@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable, inject, signal } from "@angular/core";
+import { Injectable, OnInit, inject, signal } from "@angular/core";
 import { environment } from "environments/environment";
 import { Observable, tap } from "rxjs";
 import { AddToCartDto, Cart, UpdateCartItemDto } from "./cart.model";
@@ -7,11 +7,15 @@ import { AddToCartDto, Cart, UpdateCartItemDto } from "./cart.model";
 @Injectable({
   providedIn: "root",
 })
-export class CartService {
+export class CartService implements OnInit {
   private readonly http = inject(HttpClient);
   private readonly path = `${environment.apiUrl}/Cart`;
 
   public cart = signal<Cart | null>(null);
+
+  ngOnInit(): void {
+    this.getCart();
+  }
 
   public getCart(): Observable<Cart> {
     return this.http
